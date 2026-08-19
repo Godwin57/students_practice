@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Flexbox Header</title>
+    <title>Flexbox Landing Page</title>
+    <!-- Import Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Basic reset to remove default browser margins and padding */
+        /* CSS reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -13,76 +17,366 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fcfcfc;
         }
 
-        /* 
-         * 1. Parent Header Container
-         * display: flex turns the header into a flexbox container.
-         * justify-content: space-between pushes the logo to the left and nav to the right.
-         * align-items: center vertically centers the logo and nav items.
-         */
-        .header {
+        /* Variables for design consistency */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --dark-bg: #1f2937;
+            --light-bg: #ffffff;
+            --gray-bg: #f3f4f6;
+            --text-light: #f9fafb;
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+        }
+
+        /* Reusable Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ----------------------------------
+           1. Header
+           ---------------------------------- */
+        header {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            /* Flexbox for spacing logo on the left and nav on the right */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
-            /* Visual styling */
-            background-color: #ffffff;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Text Logo styling */
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
-            color: #333333;
-            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        /* 
-         * 2. Navigation List
-         * display: flex aligns the list items in a row.
-         * gap: 1.5rem creates clean, consistent spacing between the links.
-         */
-        .nav-list {
+        nav ul {
+            list-style: none;
+            /* Flexbox to align list items horizontally */
             display: flex;
-            gap: 1.5rem;
-            list-style: none; /* Removes the default bullet points */
+            gap: 2.5rem;
         }
 
-        /* Navigation Links styling */
-        .nav-list a {
+        nav ul li a {
+            color: var(--text-light);
             text-decoration: none;
-            color: #555555;
-            font-size: 1rem;
-            transition: color 0.2s ease-in-out;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        /* Simple hover effect for the links */
-        .nav-list a:hover {
-            color: #007bff;
+        nav ul li a:hover {
+            color: #93c5fd;
+        }
+
+        /* ----------------------------------
+           2. Hero Section
+           ---------------------------------- */
+        .hero {
+            background-color: var(--light-bg);
+            padding: 6rem 0;
+        }
+
+        .hero-content {
+            /* Two-column Flexbox layout */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            /* Flex properties for the left column text */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 500px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .hero-image {
+            /* Flex properties for the right column image container */
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #cbd5e1;
+            border-radius: 0.5rem;
+            /* Center the placeholder text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #64748b;
+            font-size: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ----------------------------------
+           3. Information Grid
+           ---------------------------------- */
+        .info-section {
+            background-color: var(--light-bg);
+            padding: 5rem 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .info-section h2 {
+            text-align: center;
+            font-size: 2.25rem;
+            color: var(--text-dark);
+            margin-bottom: 4rem;
+        }
+
+        .card-row {
+            /* Flexbox for a horizontal row of cards */
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .card {
+            /* Flex basis makes cards identical in size */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.25rem;
+        }
+
+        .card-image-placeholder {
+            width: 160px;
+            height: 160px;
+            background-color: var(--primary-color);
+            border-radius: 1rem;
+            /* Center the placeholder text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* ----------------------------------
+           4. Quote Section
+           ---------------------------------- */
+        .quote-section {
+            background-color: var(--gray-bg);
+            padding: 6rem 0;
+        }
+
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            /* Flexbox to arrange quote text and author name */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quote-container blockquote {
+            font-size: 2.25rem;
+            font-style: italic;
+            color: var(--text-dark);
+            text-align: center;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        .quote-author {
+            /* Right align the author in the flex column */
+            align-self: flex-end;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        /* ----------------------------------
+           5. Footer
+           ---------------------------------- */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 2.5rem 0;
+            /* Center copyright text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-text {
+                align-items: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.75rem;
+            }
+
+            .card-row {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .card {
+                flex: 0 1 calc(50% - 2rem);
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .card {
+                flex: 0 1 100%;
+            }
+
+            .quote-container blockquote {
+                font-size: 1.75rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Component -->
-    <header class="header">
-        <!-- Logo on the far left -->
-        <a href="#" class="logo">Brand</a>
-
-        <!-- Navigation menu on the far right -->
-        <nav>
-            <ul class="nav-list">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+    <!-- 1. Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">FlexLanding</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Master Web Layouts With Flexbox</h1>
+                <p>Discover the power of CSS Flexbox. Build clean, responsive layouts without the complexity of heavy frameworks or grid systems.</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    Hero Image
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Information Grid -->
+    <section class="info-section">
+        <div class="container">
+            <h2>Why Choose Flexbox?</h2>
+            <div class="card-row">
+                <div class="card">
+                    <div class="card-image-placeholder">Box 1</div>
+                    <p>Effortlessly align and distribute space among items in a container.</p>
+                </div>
+                <div class="card">
+                    <div class="card-image-placeholder">Box 2</div>
+                    <p>Build responsive designs that adapt to any screen size.</p>
+                </div>
+                <div class="card">
+                    <div class="card-image-placeholder">Box 3</div>
+                    <p>Solve complex layout problems without messy floats or clearfixes.</p>
+                </div>
+                <div class="card">
+                    <div class="card-image-placeholder">Box 4</div>
+                    <p>Native browser support ensuring high performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Quote/Testimonial Section -->
+    <section class="quote-section">
+        <div class="quote-container">
+            <blockquote>"Flexbox simplifies layout management significantly. The ability to precisely control alignment and distribution makes it a fundamental skill for any developer."</blockquote>
+            <span class="quote-author">- Alex Developer</span>
+        </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer>
+        <p>&copy; 2026 FlexLanding. Designed for students.</p>
+    </footer>
 
 </body>
 </html>
